@@ -13,8 +13,10 @@ describe('sorteio ponderado', () => {
   })
   it('aproxima a distribuição esperada em 100.000 sorteios', () => {
     const counts = new Map(prizes.map(p => [p.id, 0]))
+    let seed = 123456789
     for (let i = 0; i < 100_000; i++) {
-      const id = drawPrize().id
+      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0
+      const id = drawPrize(() => seed / 0x100000000).id
       counts.set(id, counts.get(id)! + 1)
     }
     for (const prize of prizes) expect(counts.get(prize.id)! / 1000).toBeCloseTo(prize.weight, 0)

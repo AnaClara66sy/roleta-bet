@@ -20,10 +20,11 @@ validatePrizes(prizes)
 export function drawPrize(random: () => number = cryptoRandom): Prize {
   const value = random()
   if (!Number.isFinite(value) || value < 0 || value >= 1) throw new Error('Valor aleatório inválido.')
+  const slot = Math.floor(value * 100)
   let threshold = 0
   for (const prize of prizes) {
-    threshold += prize.weight / 100
-    if (value < threshold) return prize
+    threshold += prize.weight
+    if (slot < threshold) return prize
   }
   return prizes[prizes.length - 1]
 }
