@@ -11,9 +11,6 @@ function slice(start: number, end: number) {
   const a = point(start, 186), b = point(end, 186)
   return `M 200 200 L ${a.x} ${a.y} A 186 186 0 ${end - start > 180 ? 1 : 0} 1 ${b.x} ${b.y} Z`
 }
-function Brand() {
-  return <div className="brand" aria-label="Mottainai"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 3 43 14v20L24 45 5 34V14L24 3Z" fill="#d47d35"/><path d="M24 10 37 17v6L24 16 11 23v-6L24 10Zm-13 16 13-7 13 7v6l-13-7-13 7v-6Zm7 9 6-3 6 3-6 4-6-4Z" fill="#fceadd"/></svg><span>mottainai</span></div>
-}
 function Wheel({ rotation, spinning, onSpin }: { rotation: number; spinning: boolean; onSpin: () => void }) {
   let angle = 0
   return <div className="wheel-wrap"><div className="wheel-pointer" aria-hidden="true"/><div className="wheel-rim"><svg className="wheel" viewBox="0 0 400 400" role="img" aria-label="Roleta de brindes" style={{ transform: `rotate(${rotation}deg)`, transition: spinning ? 'transform 5s cubic-bezier(.10,.73,.13,1)' : 'none' }}>
@@ -47,10 +44,10 @@ function App() {
     timer.current = setTimeout(() => { setSpinning(false); setResult(prize); busy.current = false }, reducedMotion ? 80 : 5000)
   }
   return <main className="page"><div className="background-lines left" aria-hidden="true"/><div className="background-lines right" aria-hidden="true"/>
-    <header><Brand/><span className="header-tag">UMA SURPRESA PARA VOCÊ</span></header>
-    <section className="game" aria-label="Roleta Mottainai"><div className="intro"><span className="eyebrow">✦ &nbsp; SUA CHANCE DE GANHAR &nbsp; ✦</span><h1>Gire a roleta.<br/><em>Ganhe um brinde!</em></h1><p>Toque no centro da roleta ou no botão para descobrir seu prêmio.</p></div><Wheel rotation={rotation} spinning={spinning} onSpin={spin}/><button className="spin-button" onClick={spin} disabled={spinning}>{spinning ? 'GIRANDO...' : 'GIRAR ROLETA'} <span aria-hidden="true">↗</span></button><p className="hint">{spinning ? 'A sorte está a caminho…' : 'Boa sorte! ✦'}</p></section>
-    <footer><span>mottainai</span><span>Transformando pequenos momentos em boas lembranças.</span></footer>
-    {result && <div className="result-screen" role="button" tabIndex={0} aria-label={`${result.message} Toque para voltar à roleta.`} onClick={() => setResult(null)} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') setResult(null) }}><div className="result-burst" aria-hidden="true">✦</div><Brand/><span className="result-eyebrow">{result.id === 'tente' ? 'MAIS UMA CHANCE' : 'VOCÊ GANHOU!'}</span><div className="result-prize" style={{ borderColor: result.color }}>{result.icon}</div><h2>{result.id === 'tente' ? 'Quase lá!' : result.label}</h2><p>{result.message}</p><span className="result-return">Toque em qualquer lugar para voltar à roleta <span aria-hidden="true">↗</span></span></div>}
+    <header className="page-header"><h1>Roleta Mottainai</h1></header>
+    <section className="game" aria-label="Roleta Mottainai"><Wheel rotation={rotation} spinning={spinning} onSpin={spin}/></section>
+    <footer className="tab-bar"><button className="spin-button" onClick={spin} disabled={spinning}>{spinning ? 'GIRANDO...' : 'GIRAR ROLETA'} <span aria-hidden="true">↗</span></button><span className="tab-hint">{spinning ? 'A sorte está a caminho…' : 'Boa sorte! ✦'}</span></footer>
+    {result && <div className="result-screen" role="button" tabIndex={0} aria-label={`${result.message} Toque para voltar à roleta.`} onClick={() => setResult(null)} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') setResult(null) }}><div className="result-burst" aria-hidden="true">✦</div><span className="result-eyebrow">{result.id === 'tente' ? 'MAIS UMA CHANCE' : 'VOCÊ GANHOU!'}</span><div className="result-prize" style={{ borderColor: result.color }}>{result.icon}</div><h2>{result.id === 'tente' ? 'Quase lá!' : result.label}</h2><p>{result.message}</p><span className="result-return">Toque em qualquer lugar para voltar à roleta <span aria-hidden="true">↗</span></span></div>}
   </main>
 }
 createRoot(document.getElementById('root')!).render(<React.StrictMode><App/></React.StrictMode>)
