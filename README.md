@@ -1,6 +1,6 @@
 # Roleta de Brindes
 
-Aplicação React + TypeScript + Tailwind CSS para eventos. A roleta usa SVG com setores proporcionais aos pesos configurados e sorteio por `crypto.getRandomValues()`.
+Aplicação React + TypeScript + Tailwind CSS para eventos, com identidade visual Mottainai. A roleta usa SVG com setores proporcionais aos pesos configurados e sorteio por `crypto.getRandomValues()`.
 
 ## Executar
 
@@ -20,4 +20,6 @@ npm run build
 
 ## Funcionamento
 
-Os cinco prêmios e suas probabilidades ficam em `src/prizes.ts`. O sorteio ocorre antes da animação. A roleta gira seis voltas e termina com o centro do setor sorteado sob o ponteiro. Cada resultado concluído é salvo em `localStorage`, exclusivamente neste navegador. O painel administrativo mostra contagens, percentuais observados e as últimas 20 jogadas; a limpeza requer confirmação. Para consolidar resultados entre dispositivos ou impedir manipulação local em um evento, será necessário um servidor e controle de acesso próprios.
+Os cinco prêmios e suas probabilidades ficam em `src/prizes.ts`. O sorteio ocorre antes da animação. A roleta gira seis voltas e termina com o centro do setor sorteado sob o ponteiro. Pode ser acionada pelo botão ou pelo centro. Após o resultado, um toque na tela volta à roleta.
+
+O arquivo `render.yaml` configura a publicação como site estático no Render, usando a branch `codex/roleta-interativa` e a pasta `dist`.
