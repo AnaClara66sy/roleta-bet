@@ -9,11 +9,8 @@ body { margin:0 }
 button { font:inherit; cursor:pointer; touch-action:manipulation; -webkit-tap-highlight-color:transparent }
 
 .page { min-height:100vh; min-height:100dvh; position:relative; display:flex; flex-direction:column; overflow:hidden; background:radial-gradient(circle at 50% 47%,#fff8f1 0,#fcebdd 68%) }
-.page-header { z-index:1; position:relative; display:flex; align-items:center; justify-content:space-between; width:min(1200px,90vw); min-height:76px; margin:0 auto }
-.page-header h1 { position:absolute; left:50%; transform:translateX(-50%); margin:0; white-space:nowrap; font-family:Outfit,sans-serif; font-size:clamp(17px,2.2vw,23px); font-weight:800; letter-spacing:-.6px }
-.brand { display:flex; align-items:center; gap:9px; color:#132b43; font-family:Outfit,sans-serif; font-size:23px; font-weight:700; letter-spacing:-1px }
-.brand svg { width:32px; height:32px }
-.header-spacer { width:145px }
+.page-header { z-index:1; position:relative; display:flex; align-items:center; justify-content:center; width:min(1200px,90vw); min-height:76px; margin:0 auto }
+.page-header h1 { margin:0; white-space:nowrap; font-family:Outfit,sans-serif; font-size:clamp(17px,2.2vw,23px); font-weight:800; letter-spacing:-.6px }
 
 .game { z-index:1; flex:1; min-height:0; display:grid; place-items:center; padding:30px 20px calc(106px + env(safe-area-inset-bottom)) }
 .wheel-wrap { position:relative; width:min(72vw,58dvh,560px); aspect-ratio:1; display:grid; place-items:center; margin-top:24px; filter:drop-shadow(0 22px 21px #763d1e29) }
@@ -28,9 +25,8 @@ button { font:inherit; cursor:pointer; touch-action:manipulation; -webkit-tap-hi
 .wheel-center:hover:not(:disabled) { transform:scale(1.08); background:#1d405f }
 .wheel-center:disabled,.spin-button:disabled { opacity:.7; cursor:wait }
 
-.tab-bar { z-index:2; position:fixed; left:0; right:0; bottom:0; min-height:88px; padding:14px max(5vw,22px) calc(14px + env(safe-area-inset-bottom)); display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:14px; background:#102a43; color:#fcebdd; box-shadow:0 -7px 24px #102a431c }
-.tab-brand { font-family:Outfit,sans-serif; font-size:19px; font-weight:700 }
-.tab-hint { justify-self:end; font-size:13px; font-weight:700; color:#efb37f }
+.tab-bar { z-index:2; position:fixed; left:0; right:0; bottom:0; min-height:88px; padding:14px max(5vw,22px) calc(14px + env(safe-area-inset-bottom)); display:flex; align-items:center; justify-content:center; gap:14px; background:#102a43; color:#fcebdd; box-shadow:0 -7px 24px #102a431c }
+.tab-hint { position:absolute; right:max(5vw,22px); font-size:13px; font-weight:700; color:#efb37f }
 .spin-button { min-width:250px; min-height:54px; display:flex; align-items:center; justify-content:center; gap:19px; border:1px solid #df9a5f; border-radius:12px; background:#fcebdd; color:#102a43; padding:12px 24px; font-size:14px; font-weight:800; letter-spacing:1.5px; transition:transform .2s,background .2s }
 .spin-button span { color:#b46d34; font-size:22px; font-weight:400; line-height:14px }
 .spin-button:hover:not(:disabled) { transform:translateY(-2px); background:#fff8f1 }
@@ -41,7 +37,6 @@ button { font:inherit; cursor:pointer; touch-action:manipulation; -webkit-tap-hi
 .result-screen { position:fixed; z-index:10; inset:0; background:#fcebdd; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:30px; cursor:pointer; animation:appear .3s ease-out }
 .result-screen:focus-visible { outline:5px solid #d17e38; outline-offset:-8px }
 @keyframes appear { from { opacity:0; transform:scale(1.03) } to { opacity:1; transform:scale(1) } }
-.result-screen>.brand { position:absolute; top:25px; left:5vw }
 .result-eyebrow { color:#c27236; font-size:11px; letter-spacing:3px; font-weight:800; margin-top:15px }
 .result-prize { display:grid; place-items:center; width:175px; height:175px; margin:24px 0 13px; border:6px solid; border-radius:50%; font-size:86px; background:#fff8f1; box-shadow:0 14px 32px #a8592522 }
 .result-screen h2 { font-family:Outfit,sans-serif; font-size:clamp(42px,7vw,78px); letter-spacing:-2px; margin:0; color:#102a43 }
@@ -52,14 +47,13 @@ button { font:inherit; cursor:pointer; touch-action:manipulation; -webkit-tap-hi
 
 @media (max-width:650px) {
   .page-header { min-height:66px }
-  .page-header .brand span,.header-spacer { display:none }
   .page-header h1 { font-size:18px }
   .game { padding-bottom:calc(108px + env(safe-area-inset-bottom)) }
   .wheel-wrap { width:min(88vw,57dvh,460px) }
   .wheel-emoji { font-size:27px }
   .wheel-label { font-size:13px }
-  .tab-bar { grid-template-columns:1fr; justify-items:center; min-height:80px }
-  .tab-brand,.tab-hint { display:none }
+  .tab-bar { min-height:80px }
+  .tab-hint { display:none }
   .spin-button { min-width:min(280px,85vw) }
   .background-lines { display:none }
   .result-prize { width:145px; height:145px; font-size:70px }
