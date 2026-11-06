@@ -2,11 +2,11 @@ export type PrizeId = 'agua' | 'adesivo' | 'semente' | 'tente' | 'marca'
 export type Prize = { id: PrizeId; label: string; icon: string; weight: number; color: string; message: string }
 
 export const prizes: readonly Prize[] = [
-  { id: 'agua', label: 'Água', icon: '💧', weight: 10, color: '#4BB7C8', message: 'Parabéns! Você ganhou uma água! 💧' },
-  { id: 'adesivo', label: 'Adesivo', icon: '⭐', weight: 30, color: '#F6C95A', message: 'Parabéns! Você ganhou um adesivo! ⭐' },
-  { id: 'semente', label: 'Semente', icon: '🌱', weight: 20, color: '#80B99A', message: 'Parabéns! Você ganhou uma semente! 🌱' },
-  { id: 'tente', label: 'Tente outra vez', icon: '🔄', weight: 20, color: '#E99374', message: 'Não foi dessa vez! Tente outra vez! 🔄' },
-  { id: 'marca', label: 'Marca-página', icon: '📖', weight: 20, color: '#C9A5D7', message: 'Parabéns! Você ganhou um marca-página! 📖' },
+  { id: 'agua', label: 'Água', icon: '💧', weight: 10, color: '#8fcbd7', message: 'Parabéns! Você ganhou uma água! 💧' },
+  { id: 'adesivo', label: 'Adesivo', icon: '⭐', weight: 30, color: '#e9ac64', message: 'Parabéns! Você ganhou um adesivo! ⭐' },
+  { id: 'semente', label: 'Semente', icon: '🌱', weight: 20, color: '#a7c6a1', message: 'Parabéns! Você ganhou uma semente! 🌱' },
+  { id: 'tente', label: 'Tente outra vez', icon: '🔄', weight: 20, color: '#ead4c2', message: 'Não foi dessa vez! Tente outra vez! 🔄' },
+  { id: 'marca', label: 'Marca-página', icon: '📖', weight: 20, color: '#e2aa87', message: 'Parabéns! Você ganhou um marca-página! 📖' },
 ]
 
 export function validatePrizes(items: readonly Prize[]): void {
@@ -15,6 +15,7 @@ export function validatePrizes(items: readonly Prize[]): void {
   }
 }
 validatePrizes(prizes)
+export const sectorSweep = 360 / prizes.length
 
 /** A 32-bit integer avoids floating point rounding at interval boundaries. */
 export function drawPrize(random: () => number = cryptoRandom): Prize {
@@ -36,11 +37,7 @@ function cryptoRandom(): number {
 }
 
 export function sectorCenter(id: PrizeId): number {
-  let start = 0
-  for (const prize of prizes) {
-    const sweep = prize.weight * 3.6
-    if (prize.id === id) return start + sweep / 2
-    start += sweep
-  }
-  throw new Error('Prêmio desconhecido.')
+  const index = prizes.findIndex(prize => prize.id === id)
+  if (index < 0) throw new Error('Prêmio desconhecido.')
+  return (index + 0.5) * sectorSweep
 }

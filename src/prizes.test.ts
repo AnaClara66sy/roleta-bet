@@ -5,7 +5,7 @@ describe('sorteio ponderado', () => {
   it('cobre todos os intervalos e seus limites', () => {
     const boundaries = [0, .1, .4, .6, .8, .999999]
     expect(boundaries.map(value => drawPrize(() => value).id)).toEqual(['agua', 'adesivo', 'semente', 'tente', 'marca', 'marca'])
-    expect(prizes.map(p => sectorCenter(p.id))).toEqual([18, 90, 180, 252, 324])
+    expect(prizes.map(p => sectorCenter(p.id))).toEqual([36, 108, 180, 252, 324])
   })
   it('rejeita configuração inválida', () => {
     expect(() => validatePrizes(prizes.map(p => ({ ...p, weight: p.weight + 1 })))).toThrow()

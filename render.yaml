@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: roleta-mottainai
+    runtime: static
+    branch: codex/roleta-interativa
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
