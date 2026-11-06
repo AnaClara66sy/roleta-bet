@@ -15,6 +15,7 @@ export function validatePrizes(items: readonly Prize[]): void {
   }
 }
 validatePrizes(prizes)
+export const sectorSweep = 360 / prizes.length
 
 /** A 32-bit integer avoids floating point rounding at interval boundaries. */
 export function drawPrize(random: () => number = cryptoRandom): Prize {
@@ -36,11 +37,7 @@ function cryptoRandom(): number {
 }
 
 export function sectorCenter(id: PrizeId): number {
-  let start = 0
-  for (const prize of prizes) {
-    const sweep = prize.weight * 3.6
-    if (prize.id === id) return start + sweep / 2
-    start += sweep
-  }
-  throw new Error('Prêmio desconhecido.')
+  const index = prizes.findIndex(prize => prize.id === id)
+  if (index < 0) throw new Error('Prêmio desconhecido.')
+  return (index + 0.5) * sectorSweep
 }

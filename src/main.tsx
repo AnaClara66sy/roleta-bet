@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { drawPrize, prizes, sectorCenter, type Prize } from './prizes'
+import { drawPrize, prizes, sectorCenter, sectorSweep, type Prize } from './prizes'
 import './style.css'
 
 function point(degrees: number, radius: number) {
@@ -18,8 +18,8 @@ function Wheel({ rotation, spinning, onSpin }: { rotation: number; spinning: boo
   let angle = 0
   return <div className="wheel-wrap"><div className="wheel-pointer" aria-hidden="true"/><div className="wheel-rim"><svg className="wheel" viewBox="0 0 400 400" role="img" aria-label="Roleta de brindes" style={{ transform: `rotate(${rotation}deg)`, transition: spinning ? 'transform 5s cubic-bezier(.10,.73,.13,1)' : 'none' }}>
     {prizes.map(prize => {
-      const start = angle, end = angle += prize.weight * 3.6
-      const position = point((start + end) / 2, prize.weight === 10 ? 132 : 122)
+      const start = angle, end = angle += sectorSweep
+      const position = point((start + end) / 2, 122)
       return <g key={prize.id}><path d={slice(start, end)} fill={prize.color} stroke="#fcebdd" strokeWidth="4"/><text x={position.x} y={position.y - 12} textAnchor="middle" dominantBaseline="middle" className="wheel-emoji">{prize.icon}</text><text x={position.x} y={position.y + 17} textAnchor="middle" dominantBaseline="middle" className="wheel-label">{prize.id === 'tente' ? 'Tente de novo' : prize.label}</text></g>
     })}
   </svg></div><button className="wheel-center" onClick={onSpin} disabled={spinning} aria-label="Girar roleta"><span>GIRAR</span><small>✦</small></button></div>

@@ -1,6 +1,6 @@
 # Roleta de Brindes
 
-Aplicação React + TypeScript + Tailwind CSS para eventos, com identidade visual Mottainai. A roleta usa SVG com setores proporcionais aos pesos configurados e sorteio por `crypto.getRandomValues()`.
+Aplicação React + TypeScript + Tailwind CSS para eventos, com identidade visual Mottainai. A roleta usa SVG com cinco setores visualmente iguais; o sorteio mantém os pesos configurados e usa `crypto.getRandomValues()`.
 
 ## Executar
 
